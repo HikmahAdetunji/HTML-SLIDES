@@ -58,6 +58,7 @@ hideInToc: true
 # What is HTML?
 
 Fully known as HyperText Markup Language, it's a markup language(not a programming language), which serves as the skeleton/foundation of the web. It's upon it and in it that other languages of the web are built.
+
 <v-clicks>
 
 # Brief History
@@ -72,8 +73,13 @@ Fully known as HyperText Markup Language, it's a markup language(not a programmi
 
 **2008 to 2014:** HTML5 is developed, adding semantic elements, native audio and video, canvas, and better forms. It becomes W3C Recommendation in 2014.
 
-**2019 till now:** The W3C and WHATWG agree that the WHATWG's HTML Living Standard is the single official specification. There are no more numbered versions;HTML now evolves continuously. This is why newer features like <code>dialog</code> and <code> popover</code> keep arrriving.
 </v-clicks>
+
+---
+transition: slide-up
+---
+
+**2019 till now:** The W3C and WHATWG agree that the WHATWG's HTML Living Standard is the single official specification. There are no more numbered versions;HTML now evolves continuously. This is why newer features like <code>dialog</code> and <code> popover</code> keep arrriving.
 
 ---
 transition: slide-up
@@ -106,6 +112,7 @@ title: Anatomy of an HTML Document
 ```
 
 ---
+
 title: Elements, Tags, and Attributes
 ---
 
@@ -208,6 +215,7 @@ Attributes give an element **extra information**. They go in the **opening tag**
 </v-clicks>
 
 ---
+
 hideInToc: true
 ---
 
@@ -245,6 +253,7 @@ hideInToc: true
 </v-clicks>
 
 ---
+
 title: Common Elements
 layout: two-cols
 ---
@@ -437,7 +446,6 @@ layout: two-cols
 </v-clicks>
 
 ---
-
 title: Forms and Input
 ---
 
@@ -490,3 +498,188 @@ layout: two-cols
   <button type="submit">Sign up</button>
 </form>
 ```
+
+---
+title: Details and Summary
+layout: two-cols
+---
+
+# `<details>` and `<summary>`
+
+A **native collapsible section**, with no JavaScript.
+
+<v-clicks>
+
+- **`<details>`**: the container that opens and closes
+- **`<summary>`**: the always-visible label the user clicks
+- Everything else inside `<details>` is **hidden until opened**
+- `<summary>` should be the **first child** of `<details>`
+
+</v-clicks>
+
+::right::
+
+```html
+<details>
+  <summary>What is HTML?</summary>
+  <p>HTML is the language that structures web pages.</p>
+</details>
+```
+
+<details>
+  <summary>What is HTML? </summary>
+  <p>HTML is the language that structures web pages.</p>
+</details>
+
+---
+hideInToc: true
+layout: two-cols
+---
+
+# The `open` Attribute
+
+<v-clicks>
+
+- By default, `<details>` starts **closed**
+- Add `open` to start it **expanded**
+- `open` is a **boolean attribute**: present means true, no value needed
+- The browser adds and removes it automatically as the user toggles
+- You can read it in JavaScript with `element.open`
+
+</v-clicks>
+
+::right::
+
+```html
+<!-- Closed by default -->
+<details>
+  <summary>FAQ 1</summary>
+  <p>Hidden at first.</p>
+</details>
+
+<!-- Open by default -->
+<details open>
+  <summary>FAQ 2</summary>
+  <p>Visible at first.</p>
+</details>
+```
+
+---
+hideInToc: true
+layout: two-cols
+---
+
+# Building an Accordion
+
+An **accordion** is a group of collapsible sections.
+
+<v-clicks>
+
+- Put several `<details>` one after another
+- Give them the **same `name`** so only **one stays open** at a time
+- Opening one automatically closes the others
+- `name` is supported in current versions of the major browsers. In an older browser, they simply work as independent sections
+
+</v-clicks>
+
+::right::
+
+```html
+<details name="faq" open>
+  <summary>What is HTML?</summary>
+  <p>The structure of a web page.</p>
+</details>
+
+<details name="faq">
+  <summary>What is CSS?</summary>
+  <p>The style of a web page.</p>
+</details>
+
+<details name="faq">
+  <summary>What is JavaScript?</summary>
+  <p>The behavior of a web page.</p>
+</details>
+```
+
+<!--
+Without the name attribute, each details toggles independently. That is also useful.
+-->
+
+---
+hideInToc: true
+---
+
+# Why Use `<details>`?
+
+<v-clicks>
+
+- **No JavaScript**: less code and less to break
+- **Accessible by default**: keyboard (Tab, Enter, Space) and screen readers work out of the box
+- **Great for**: FAQs, long notes, optional help text, "show more" content
+- **Avoid for**: content users must see, or critical navigation
+
+</v-clicks>
+
+---
+title: The Dialog Element
+layout: two-cols
+---
+
+# `<dialog>`
+
+A native **pop-up window** built into HTML.
+
+<v-clicks>
+
+- A **modal** dialog blocks the rest of the page until the user responds.
+- The browser handles the **backdrop**, the **Esc key**, and **focus** for you.
+- It appears in the **top layer**, so no `z-index` battles.
+- Great for confirmations, alerts, and small forms.
+
+</v-clicks>
+
+
+::right::
+
+
+```html
+<button id="open">Open dialog</button>
+
+<dialog id="myDialog">
+  <h2> Delete this file? </h2>
+  <p>This cannot be undone </p>
+  <button id="close"> Close</button>
+  </dialog>
+  ```
+
+
+<button class="demo-btn" @click="$event.target.nextElementSibling.showModal()">
+Open dialog
+</button>
+<dialog class="demo-dialog">
+<h2>Delete this file?</h2>
+<p>This cannot be undone</p>
+<button class="demo-btn" @click="$event.target.closest('dialog').close()">
+Close
+</button>
+</dialog>
+
+<style>
+  .demo-btn{
+    padding:0.4rem 1rem;
+    border:1px solid black;
+    border-radius:8px;
+    cursor:pointer;
+  }
+  .demo-dialog{
+    border:none;
+    border-radius:12px;
+    padding:1.5rem;
+    background:white;
+    color:#222;
+  }
+  .demo-dialog::backdrop{
+    background:rgba(0 0 0 0.6)
+
+  }
+  </style>
