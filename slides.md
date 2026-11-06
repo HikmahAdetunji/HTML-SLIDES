@@ -664,6 +664,28 @@ Close
 </button>
 </dialog>
 
+
+---
+title:The Popover Attribute
+---
+
+# Popover
+
+A **lightweight overlay**, with **no JavaScript** needed.
+
+<v-clicks>
+
+- Add the **`popover`** attribute to any element to make it a popover.
+- It's **hidden** until triggered.
+- Add **`popovertarget="id"`** to a `<button>` to toggle it.
+- Appears in the **top layer**, like a dialog
+- But unlike a modal dialog, the page behind **stays usable**
+
+</v-clicks>
+
+
+
+
 <style>
   .demo-btn{
     padding:0.4rem 1rem;
@@ -683,3 +705,5 @@ Close
 
   }
   </style>
+
+  
